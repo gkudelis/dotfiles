@@ -14,6 +14,7 @@ Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'mattn/emmet-vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'plasticboy/vim-markdown'
+" Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-classpath'
 Plugin 'tpope/vim-fugitive'
@@ -43,7 +44,7 @@ set expandtab
 
 syntax on
 set background=dark
-colorscheme solarized
+silent! colorscheme solarized
 "set cursorline
 set t_Co=256
 
