@@ -1,0 +1,21 @@
+[user]
+	name = Giedrius Kudelis
+	email = giedrius.kudelis@gmail.com
+[core]
+	autocrlf = input
+	safecrlf = false
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    rv = revert
+    pl = pull
+    ps = push
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short --all
+    type = cat-file -t
+    dump = cat-file -p
+[push]
+	default = simple
+[pull]
+	rebase = true
