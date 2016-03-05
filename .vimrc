@@ -8,6 +8,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'Yggdroot/indentLine'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'mattn/emmet-vim'
@@ -57,8 +58,6 @@ set guioptions-=r
 set guioptions-=b
 
 set grepprg=grep\ -nH\ $*
-
-filetype plugin indent on
 
 " NERDtree mapping
 nmap <leader>n :NERDTree<cr>
