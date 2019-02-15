@@ -9,7 +9,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'Yggdroot/indentLine'
+" Plugin 'Yggdroot/indentLine'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'mattn/emmet-vim'
 Plugin 'ntpeters/vim-better-whitespace'
@@ -67,3 +67,4 @@ nmap <leader>n :NERDTree<cr>
 vmap \| ::w !
 
 let g:vim_markdown_folding_disabled = 1
+set conceallevel=2
