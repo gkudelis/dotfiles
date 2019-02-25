@@ -32,3 +32,5 @@ alias l='ls'
 alias ll='ls -l'
 alias la='ls -la'
 alias lh='ls -lh'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

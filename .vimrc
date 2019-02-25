@@ -1,31 +1,35 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Load vim-plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+" Load vim-plug for nvim
+if empty(glob("~/.local/share/nvim/site/autoload/plug.vim"))
+    execute '!curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin()
 
-Plugin 'altercation/vim-colors-solarized'
-" Plugin 'Yggdroot/indentLine'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'mattn/emmet-vim'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'plasticboy/vim-markdown'
-" Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-classpath'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
+Plug 'altercation/vim-colors-solarized'
+" Plug 'Yggdroot/indentLine'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'mattn/emmet-vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'plasticboy/vim-markdown'
+" Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf.vim'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 set rtp+=/Users/giedrius/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
 set laststatus=2
+
+set rtp+=~/.fzf
 
 set nu
 set autoindent
@@ -42,7 +46,6 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-syntax on
 set background=dark
 silent! colorscheme solarized
 "set cursorline
@@ -63,8 +66,14 @@ set grepprg=grep\ -nH\ $*
 " NERDtree mapping
 nmap <leader>n :NERDTree<cr>
 
+" ag and fzf
+nmap <leader>a :Ag 
+nmap <leader>f :FZF<cr>
+
 " visual selection pipe to some command
 vmap \| ::w !
 
 let g:vim_markdown_folding_disabled = 1
 set conceallevel=2
+
+set mouse=""
