@@ -4,9 +4,11 @@
 [core]
 	autocrlf = input
 	safecrlf = false
+	editor = /usr/bin/vim
 [alias]
     co = checkout
     ci = commit
+    ce = commit --allow-empty
     st = status
     br = branch
     rv = revert

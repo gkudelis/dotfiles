@@ -27,10 +27,6 @@ autoload -U promptinit
 promptinit
 prompt adam2
 
-# Make path include macports and global pip repo
-export PATH="/opt/local/bin:/opt/local/sbin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
-export PATH="$HOME/.cabal/bin:$PATH"
-
 # No comment
 alias l='ls'
 alias ll='ls -l'
@@ -39,10 +35,16 @@ alias lh='ls -lh'
 # mac can be a pain
 alias love='/Applications/love.app/Contents/MacOS/love'
 
-# Set project home
-export PROJECT_HOME="$HOME/projects"
-# This loads virtualenvwrapper
-source /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh
+# where I left exercism binary and some zsh compatibility stuff
+export PATH="$HOME/Projects/exercism-scala/cli:$PATH"
+if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
+    source ~/.config/exercism/exercism_completion.zsh
+fi
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+#export PATH="$HOME/anaconda3/bin:$PATH"
+
+# added by travis gem
+#[ -f /Users/giedrius/.travis/travis.sh ] && source /Users/giedrius/.travis/travis.sh
+
+[ -f /Users/giedrius/.nix-profile/etc/profile.d/nix.sh ] && source /Users/giedrius/.nix-profile/etc/profile.d/nix.sh
+

@@ -1,33 +1,48 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plug 'altercation/vim-colors-solarized'
+" Plug 'Yggdroot/indentLine'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'mattn/emmet-vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'plasticboy/vim-markdown'
+Plug 'powerline/powerline'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fireplace'
+Plug 'scrooloose/syntastic'
 
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Yggdroot/indentLine'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'mattn/emmet-vim'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'plasticboy/vim-markdown'
-" Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-classpath'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
+" nice multi-function plugins
+Plug 'tpope/vim-sensible'
+Plug 'sheerun/vim-polyglot'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+" great for clojure
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
-set rtp+=/Users/giedrius/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
+" better grepping and finding
+Plug 'mileszs/ack.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+" autocompletion
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
+
+call plug#end()
+
 set laststatus=2
 
-set nu
+set number
+set relativenumber
 set autoindent
 
 set hidden
@@ -67,3 +82,33 @@ nmap <leader>n :NERDTree<cr>
 vmap \| ::w !
 
 let g:vim_markdown_folding_disabled = 1
+
+set clipboard=unnamed
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" shortcuts for ag and fzf
+nmap <Leader>a :Ack!<Space>
+nmap ; :Buffers<CR>
+nmap <Leader>f :Files<CR>
+
+" autocompletion setup
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ }
+
+" syntactic setup
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
