@@ -81,6 +81,7 @@ nmap <leader>n :NERDTree<cr>
 " visual selection pipe to some command
 vmap \| ::w !
 
+set conceallevel=1
 let g:vim_markdown_folding_disabled = 1
 
 set clipboard=unnamed
