@@ -15,6 +15,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fireplace'
 Plug 'scrooloose/syntastic'
+Plug 'roxma/vim-tmux-clipboard'
 
 " nice multi-function plugins
 Plug 'tpope/vim-sensible'
