@@ -4,9 +4,11 @@
 [core]
 	autocrlf = input
 	safecrlf = false
+	editor = /usr/bin/vim
 [alias]
     co = checkout
     ci = commit
+    ce = commit --allow-empty
     st = status
     br = branch
     rv = revert
@@ -16,6 +18,6 @@
     type = cat-file -t
     dump = cat-file -p
 [push]
-	default = current
+	default = simple
 [pull]
 	rebase = true

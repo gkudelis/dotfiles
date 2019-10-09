@@ -22,16 +22,15 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-set rtp+=/Users/giedrius/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
 set laststatus=2
 
-set rtp+=~/.fzf
-
-set nu
+set number
+set relativenumber
 set autoindent
 
 set hidden
@@ -68,12 +67,13 @@ nmap <leader>n :NERDTree<cr>
 
 " ag and fzf
 nmap <leader>a :Ag 
-nmap <leader>f :FZF<cr>
+nmap <leader>f :Files<cr>
+nmap ; :Buffers<cr>
 
 " visual selection pipe to some command
 vmap \| ::w !
 
-let g:vim_markdown_folding_disabled = 1
 set conceallevel=2
+let g:vim_markdown_folding_disabled = 1
 
 set mouse=""
