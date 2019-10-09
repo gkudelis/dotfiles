@@ -22,8 +22,30 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+
+" better grepping and finding
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+Plug 'tpope/vim-fireplace'
+Plug 'scrooloose/syntastic'
+Plug 'roxma/vim-tmux-clipboard'
+
+" nice multi-function plugins
+Plug 'tpope/vim-sensible'
+Plug 'sheerun/vim-polyglot'
+
+" great for clojure
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+
+" autocompletion
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
 
 call plug#end()
 
@@ -60,8 +82,6 @@ set guioptions-=l
 set guioptions-=r
 set guioptions-=b
 
-set grepprg=grep\ -nH\ $*
-
 " NERDtree mapping
 nmap <leader>n :NERDTree<cr>
 
@@ -77,3 +97,23 @@ set conceallevel=2
 let g:vim_markdown_folding_disabled = 1
 
 set mouse=""
+set clipboard=unnamed
+
+" autocompletion setup
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ }
+
+" syntactic setup
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
