@@ -36,3 +36,11 @@ alias lh='ls -lh'
 alias dodo='docker run --rm -it -v "$PWD:$PWD" -w "$PWD" -u $(id -u):$(id -g)'
 
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# where I left exercism binary and some zsh compatibility stuff
+export PATH="$HOME/Projects/exercism-scala/cli:$PATH"
+if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
+    source ~/.config/exercism/exercism_completion.zsh
+fi
+
+[ -f /Users/giedrius/.nix-profile/etc/profile.d/nix.sh ] && source /Users/giedrius/.nix-profile/etc/profile.d/nix.sh
