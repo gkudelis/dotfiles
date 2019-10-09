@@ -97,7 +97,7 @@ set conceallevel=2
 let g:vim_markdown_folding_disabled = 1
 
 set mouse=""
-set clipboard=unnamed
+set clipboard^=unnamed,unnamedplus
 
 " autocompletion setup
 autocmd BufEnter * call ncm2#enable_for_buffer()
