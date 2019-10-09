@@ -32,8 +32,6 @@ alias l='ls'
 alias ll='ls -l'
 alias la='ls -la'
 alias lh='ls -lh'
-# mac can be a pain
-alias love='/Applications/love.app/Contents/MacOS/love'
 
 # where I left exercism binary and some zsh compatibility stuff
 export PATH="$HOME/Projects/exercism-scala/cli:$PATH"
@@ -41,10 +39,4 @@ if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
     source ~/.config/exercism/exercism_completion.zsh
 fi
 
-#export PATH="$HOME/anaconda3/bin:$PATH"
-
-# added by travis gem
-#[ -f /Users/giedrius/.travis/travis.sh ] && source /Users/giedrius/.travis/travis.sh
-
 [ -f /Users/giedrius/.nix-profile/etc/profile.d/nix.sh ] && source /Users/giedrius/.nix-profile/etc/profile.d/nix.sh
-
