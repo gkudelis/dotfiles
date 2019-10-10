@@ -17,7 +17,7 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'mattn/emmet-vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown'
-" Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-fugitive'
@@ -50,6 +50,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 call plug#end()
 
 set laststatus=2
+set noshowmode
 
 set number
 set relativenumber
@@ -71,6 +72,7 @@ set background=dark
 silent! colorscheme solarized
 "set cursorline
 set t_Co=256
+let g:lightline = { 'colorscheme': 'solarized' }
 
 set wildmode=longest,list,full
 set wildmenu
