@@ -33,4 +33,6 @@ alias ll='ls -l'
 alias la='ls -la'
 alias lh='ls -lh'
 
+alias dodo='docker run --rm -it -v "$PWD:$PWD" -w "$PWD"'
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
