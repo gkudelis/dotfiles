@@ -40,8 +40,8 @@ Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " autocompletion
-Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
 Plug 'autozimu/LanguageClient-neovim', {
   \ 'branch': 'next',
   \ 'do': 'bash install.sh',
@@ -91,6 +91,7 @@ nmap <leader>n :NERDTree<cr>
 nmap <leader>a :Ag 
 nmap <leader>f :Files<cr>
 nmap ; :Buffers<cr>
+vmap a y:Ag <C-R>"<CR>
 
 " visual selection pipe to some command
 vmap \| ::w !
@@ -101,13 +102,21 @@ let g:vim_markdown_folding_disabled = 1
 set mouse=""
 set clipboard^=unnamed,unnamedplus
 
+" python
+let g:python3_host_prog="/usr/local/bin/python3"
+
+" language server commands
+nmap <leader>d :call LanguageClient_textDocument_definition()<CR>
+nmap <leader>h :call LanguageClient_textDocument_hover()<CR>
+
 " autocompletion setup
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'ruby': ['solargraph', 'stdio'],
     \ }
 
 " syntactic setup
