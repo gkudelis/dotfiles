@@ -87,6 +87,10 @@ set guioptions-=b
 " NERDtree mapping
 nmap <leader>n :NERDTree<cr>
 
+" git fugitive stuff
+nmap <leader>gb :Gblame<cr>
+nmap <leader>gs :G<cr>
+
 " ag and fzf
 nmap <leader>a :Ag 
 nmap <leader>f :Files<cr>
