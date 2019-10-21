@@ -41,5 +41,18 @@ bindkey -r "^R"
 bindkey "^F" fzf-file-widget
 bindkey "^H" fzf-history-widget
 
+GPG_TTY=$(tty)
+export GPG_TTY
 SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK
+
+export LIBRARY_PATH="${LD_LIBRARY_PATH:+LD_LIBRARY_PATH:}/usr/local/opt/openssl@1.1/lib/"
+
+eval "$(rbenv init -)"
+
+DEVTOOLS_PATH=~/vinted/dev-tools
+dev-tools() {
+  (cd "$DEVTOOLS_PATH" && bundle exec bin/dev-tools "$@")
+}
+
+export PATH="$PATH:$HOME/bin"
