@@ -103,7 +103,7 @@ set mouse=""
 set clipboard^=unnamed,unnamedplus
 
 " python
-let g:python3_host_prog="/usr/local/bin/python3"
+let g:python3_host_prog="/Users/giedrius/.nix-profile/bin/python3"
 
 " language server commands
 nmap <leader>d :call LanguageClient_textDocument_definition()<CR>
