@@ -1,5 +1,5 @@
-DOTFILES := $(wildcard .*)
-EXCLUDE = . .. .git .gitignore Makefile
+DOTFILES := $(wildcard *)
+EXCLUDE = Makefile
 DOTFILES := $(filter-out $(EXCLUDE), $(DOTFILES))
 
 install: link plug-install
@@ -7,14 +7,13 @@ install: link plug-install
 uninstall: plug-uninstall unlink
 
 link:
-	$(foreach DOTFILE, $(DOTFILES), ln -s dotfiles/$(DOTFILE) ~/$(DOTFILE);)
+	$(foreach DOTFILE, $(DOTFILES), stow --no-folding $(DOTFILE);)
 
 unlink:
-	$(foreach DOTFILE, $(DOTFILES), rm -f ~/$(DOTFILE);)
+	$(foreach DOTFILE, $(DOTFILES), stow --delete --no-folding $(DOTFILE);)
 
 plug-install:
-	vim +PlugInstall
 	nvim +PlugInstall
 
 plug-uninstall:
-	rm -rf ~/.vim
+	rm -rf ~/.config/nvim/plugged
