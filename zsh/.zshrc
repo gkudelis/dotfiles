@@ -44,3 +44,6 @@ if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
 fi
 
 [ -f /Users/giedrius/.nix-profile/etc/profile.d/nix.sh ] && source /Users/giedrius/.nix-profile/etc/profile.d/nix.sh
+
+# add docker-machine env stuff
+eval $(docker-machine env)
