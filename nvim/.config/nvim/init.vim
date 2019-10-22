@@ -36,12 +36,12 @@ Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " autocompletion
-"Plug 'roxma/nvim-yarp'
-"Plug 'ncm2/ncm2'
-"Plug 'autozimu/LanguageClient-neovim', {
-"  \ 'branch': 'next',
-"  \ 'do': 'bash install.sh',
-"  \ }
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
 
 call plug#end()
 
@@ -110,7 +110,7 @@ nmap <leader>d :call LanguageClient_textDocument_definition()<CR>
 nmap <leader>h :call LanguageClient_textDocument_hover()<CR>
 
 " autocompletion setup
-"autocmd BufEnter * call ncm2#enable_for_buffer()
+autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
