@@ -14,6 +14,7 @@ bindkey -M vicmd '?' history-incremental-search-backward
 #zstyle ':completion::complete:*' use-cache 1
 
 # Completion
+export fpath=(~/.zsh/functions $fpath)
 autoload -U compinit
 compinit
 # Completion style
