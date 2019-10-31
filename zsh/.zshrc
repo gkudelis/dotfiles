@@ -35,4 +35,8 @@ alias lh='ls -lh'
 
 alias dodo='docker run --rm -it -v "$PWD:$PWD" -w "$PWD" -u $(id -u):$(id -g)'
 
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+bindkey -r "^T"
+bindkey -r "^R"
+bindkey "^F" fzf-file-widget
+bindkey "^H" fzf-history-widget
