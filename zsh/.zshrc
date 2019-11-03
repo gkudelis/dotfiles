@@ -40,3 +40,7 @@ bindkey -r "^T"
 bindkey -r "^R"
 bindkey "^F" fzf-file-widget
 bindkey "^H" fzf-history-widget
+
+GPG_TTY=$(tty)
+export GPG_TTY
+gpg-connect-agent /bye
