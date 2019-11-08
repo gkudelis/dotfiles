@@ -58,4 +58,3 @@ dev-tools() {
 export PATH="$PATH:$HOME/bin"
 
 eval "$(direnv hook zsh)"
-source ~/vinted/dev-tools/docker/aliases
