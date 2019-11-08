@@ -104,6 +104,9 @@ let g:vim_markdown_folding_disabled = 1
 set mouse=""
 set clipboard^=unnamed,unnamedplus
 
+" spec in tmux window
+nnoremap <leader>s :!tmux new-window 'vspec % && cat'<cr>
+
 " python
 let g:python3_host_prog="/usr/local/bin/python3"
 
