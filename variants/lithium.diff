@@ -1,0 +1,64 @@
+diff -ruN common/git/.gitconfig current/git/.gitconfig
+--- common/git/.gitconfig	2019-11-16 15:15:43.000000000 +0200
++++ current/git/.gitconfig	2019-11-17 13:43:58.000000000 +0200
+@@ -1,10 +1,10 @@
+ [user]
+ 	name = Giedrius Kudelis
+-	email = giedrius.kudelis@gmail.com
++	email = giedrius.kudelis@vinted.com
+ [core]
+ 	autocrlf = input
+ 	safecrlf = false
+-	editor = /usr/bin/vim
++	editor = /usr/local/bin/nvim
+ [alias]
+     co = checkout
+     ci = commit
+diff -ruN common/gnupg/.gnupg/gpg-agent.conf current/gnupg/.gnupg/gpg-agent.conf
+--- common/gnupg/.gnupg/gpg-agent.conf	2019-11-16 15:15:43.000000000 +0200
++++ current/gnupg/.gnupg/gpg-agent.conf	2019-11-17 13:43:58.000000000 +0200
+@@ -1 +1,2 @@
++pinentry-program /usr/local/bin/pinentry-mac
+ enable-ssh-support
+diff -ruN common/nvim/.config/nvim/init.vim current/nvim/.config/nvim/init.vim
+--- common/nvim/.config/nvim/init.vim	2019-11-16 15:15:43.000000000 +0200
++++ current/nvim/.config/nvim/init.vim	2019-11-17 13:43:58.000000000 +0200
+@@ -104,6 +104,9 @@
+ set mouse=""
+ set clipboard^=unnamed,unnamedplus
+ 
++" spec in tmux window
++nnoremap <leader>s :!tmux new-window 'vspec % && cat'<cr>
++
+ " python
+ let g:python3_host_prog="/usr/local/bin/python3"
+ 
+@@ -118,7 +121,7 @@
+ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+ let g:LanguageClient_serverCommands = {
+     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+-    \ 'ruby': ['solargraph', 'stdio'],
++    \ 'ruby': [expand('~/bin/ruby_language_server.sh')],
+     \ }
+ 
+ " syntactic setup
+diff -ruN common/zsh/.zshrc current/zsh/.zshrc
+--- common/zsh/.zshrc	2019-11-16 15:15:43.000000000 +0200
++++ current/zsh/.zshrc	2019-11-17 13:43:58.000000000 +0200
+@@ -43,3 +43,16 @@
+ 
+ SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+ export SSH_AUTH_SOCK
++
++export LIBRARY_PATH="${LD_LIBRARY_PATH:+LD_LIBRARY_PATH:}/usr/local/opt/openssl@1.1/lib/"
++
++eval "$(rbenv init -)"
++
++DEVTOOLS_PATH=~/vinted/dev-tools
++dev-tools() {
++  (cd "$DEVTOOLS_PATH" && bundle exec bin/dev-tools "$@")
++}
++
++export PATH="$PATH:$HOME/bin"
++
++eval "$(direnv hook zsh)"
