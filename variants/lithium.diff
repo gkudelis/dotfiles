@@ -1,6 +1,6 @@
 diff -ruN common/git/.gitconfig current/git/.gitconfig
---- common/git/.gitconfig	2019-11-16 15:15:43.000000000 +0200
-+++ current/git/.gitconfig	2019-11-17 13:43:58.000000000 +0200
+--- common/git/.gitconfig	2019-11-17 13:47:27.000000000 +0200
++++ current/git/.gitconfig	2019-11-17 13:56:24.000000000 +0200
 @@ -1,10 +1,10 @@
  [user]
  	name = Giedrius Kudelis
@@ -15,14 +15,14 @@ diff -ruN common/git/.gitconfig current/git/.gitconfig
      co = checkout
      ci = commit
 diff -ruN common/gnupg/.gnupg/gpg-agent.conf current/gnupg/.gnupg/gpg-agent.conf
---- common/gnupg/.gnupg/gpg-agent.conf	2019-11-16 15:15:43.000000000 +0200
-+++ current/gnupg/.gnupg/gpg-agent.conf	2019-11-17 13:43:58.000000000 +0200
+--- common/gnupg/.gnupg/gpg-agent.conf	2019-11-17 13:47:27.000000000 +0200
++++ current/gnupg/.gnupg/gpg-agent.conf	2019-11-17 13:56:24.000000000 +0200
 @@ -1 +1,2 @@
 +pinentry-program /usr/local/bin/pinentry-mac
  enable-ssh-support
 diff -ruN common/nvim/.config/nvim/init.vim current/nvim/.config/nvim/init.vim
---- common/nvim/.config/nvim/init.vim	2019-11-16 15:15:43.000000000 +0200
-+++ current/nvim/.config/nvim/init.vim	2019-11-17 13:43:58.000000000 +0200
+--- common/nvim/.config/nvim/init.vim	2019-11-17 13:47:27.000000000 +0200
++++ current/nvim/.config/nvim/init.vim	2019-11-17 13:56:24.000000000 +0200
 @@ -104,6 +104,9 @@
  set mouse=""
  set clipboard^=unnamed,unnamedplus
@@ -42,9 +42,17 @@ diff -ruN common/nvim/.config/nvim/init.vim current/nvim/.config/nvim/init.vim
      \ }
  
  " syntactic setup
+diff -ruN common/zsh/.zshenv current/zsh/.zshenv
+--- common/zsh/.zshenv	2019-11-17 14:24:45.000000000 +0200
++++ current/zsh/.zshenv	2019-11-17 13:56:24.000000000 +0200
+@@ -1,2 +1,4 @@
++source ~/vinted/dev-tools/docker/aliases
++
+ GPG_TTY=$(tty)
+ export GPG_TTY
 diff -ruN common/zsh/.zshrc current/zsh/.zshrc
---- common/zsh/.zshrc	2019-11-16 15:15:43.000000000 +0200
-+++ current/zsh/.zshrc	2019-11-17 13:43:58.000000000 +0200
+--- common/zsh/.zshrc	2019-11-17 14:25:04.000000000 +0200
++++ current/zsh/.zshrc	2019-11-17 13:56:24.000000000 +0200
 @@ -43,3 +43,16 @@
  
  SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
