@@ -37,7 +37,7 @@ def diff_file(variant):
 
 
 def plug_install():
-    sh.nvim("+PlugInstall", "+UpdateRemotePlugins", "+qa")
+    sh.nvim("--headless", "+PlugInstall", "+UpdateRemotePlugins", "+qa")
 
 
 def plug_uninstall():
@@ -75,11 +75,7 @@ def reset_to_common():
 
 @add_to_dispatch
 def store(variant):
-    try:
-        sh.diff("-ruN", "common", "current", _out=diff_file(variant))
-    except sh.ErrorReturnCode_1:
-        # return code of 1 from diff means differences were found
-        pass
+    sh.diff("-ruN", "common", "current", _out=diff_file(variant), _ok_code=[0, 1])
 
 
 @add_to_dispatch
