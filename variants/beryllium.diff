@@ -1,20 +1,6 @@
-diff -ruN common/gnupg/.gnupg/gpg-agent.conf current/gnupg/.gnupg/gpg-agent.conf
---- common/gnupg/.gnupg/gpg-agent.conf	2019-11-17 13:47:27.000000000 +0200
-+++ current/gnupg/.gnupg/gpg-agent.conf	1970-01-01 03:00:00.000000000 +0300
-@@ -1 +0,0 @@
--enable-ssh-support
 diff -ruN common/nvim/.config/nvim/init.vim current/nvim/.config/nvim/init.vim
 --- common/nvim/.config/nvim/init.vim	2019-11-17 13:47:27.000000000 +0200
 +++ current/nvim/.config/nvim/init.vim	2019-11-16 15:15:34.000000000 +0200
-@@ -43,8 +43,6 @@
-   \ 'do': 'bash install.sh',
-   \ }
- 
--Plug 'aserebryakov/vim-todo-lists'
--
- call plug#end()
- 
- set laststatus=2
 @@ -105,7 +103,7 @@
  set clipboard^=unnamed,unnamedplus
  
@@ -43,19 +29,6 @@ diff -ruN common/tmux/.tmux.conf current/tmux/.tmux.conf
 +set-option -g default-shell /Users/giedrius/.nix-profile/bin/zsh
  
  set -g escape-time 0
-diff -ruN common/zsh/.zlogin current/zsh/.zlogin
---- common/zsh/.zlogin	2019-11-17 13:47:27.000000000 +0200
-+++ current/zsh/.zlogin	1970-01-01 03:00:00.000000000 +0300
-@@ -1 +0,0 @@
--eval $(gpg-agent --daemon)
-diff -ruN common/zsh/.zshenv current/zsh/.zshenv
---- common/zsh/.zshenv	2019-11-17 13:47:27.000000000 +0200
-+++ current/zsh/.zshenv	1970-01-01 03:00:00.000000000 +0300
-@@ -1,4 +0,0 @@
--source ~/vinted/dev-tools/docker/aliases
--
--GPG_TTY=$(tty)
--export GPG_TTY
 diff -ruN common/zsh/.zshrc current/zsh/.zshrc
 --- common/zsh/.zshrc	2019-11-17 13:47:27.000000000 +0200
 +++ current/zsh/.zshrc	2019-11-16 15:15:34.000000000 +0200
@@ -63,15 +36,15 @@ diff -ruN common/zsh/.zshrc current/zsh/.zshrc
  
  alias dodo='docker run --rm -it -v "$PWD:$PWD" -w "$PWD" -u $(id -u):$(id -g)'
  
--[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
--bindkey -r "^T"
--bindkey -r "^R"
--bindkey "^F" fzf-file-widget
--bindkey "^H" fzf-history-widget
-+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+ [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+ bindkey -r "^T"
+ bindkey -r "^R"
+ bindkey "^F" fzf-file-widget
+ bindkey "^H" fzf-history-widget
  
--SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
--export SSH_AUTH_SOCK
+ SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+ export SSH_AUTH_SOCK
++
 +# where I left exercism binary and some zsh compatibility stuff
 +export PATH="$HOME/Projects/exercism-scala/cli:$PATH"
 +if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
