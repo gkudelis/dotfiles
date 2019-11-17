@@ -84,8 +84,10 @@ def store(variant):
 
 @add_to_dispatch
 def restore(variant):
+    unlink()
     reset_to_common()
     sh.patch("--directory=current", "--strip=1", _in=open(diff_file(variant)))
+    link()
 
 
 if __name__ == "__main__":
