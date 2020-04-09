@@ -27,23 +27,11 @@ def dispatch(command, *args):
 
 def with_logging(f):
     @wraps(f)
-    def wrapped():
+    def wrapped(*args):
         print("Start {}".format(f.__name__))
-        f()
+        f(*args)
         print("Finish {}".format(f.__name__))
     return wrapped
-
-
-def stow_common_args():
-    return ["--no-folding", "--dir=current", "--target=" + os.environ["HOME"]]
-
-
-def packages():
-    return list(map(lambda p: p.split("/")[-1], glob.glob("current/*")))
-
-
-def diff_file(variant):
-    return "variants/{}.diff".format(variant)
 
 
 @with_logging
@@ -59,19 +47,49 @@ def plug_uninstall():
 
 @with_logging
 def link():
-    for package in packages():
-        sh.stow(*stow_common_args(), "--stow", package)
+    sh.stow("--no-folding", "--target=" + os.environ["HOME"], "--stow", "current")
 
 
 @with_logging
 def unlink():
-    for package in packages():
-        sh.stow(*stow_common_args(), "--delete", package)
+    sh.stow("--no-folding", "--target=" + os.environ["HOME"], "--delete", "current")
+
+
+def select_variant():
+    return os.getenv("DOTFILES_VARIANT", "default")
+
+
+def common_files():
+    for dirpath, _, filenames in os.walk("common"):
+        for filename in filenames:
+            fullname = os.path.join(dirpath, filename)
+            yield os.path.relpath(fullname, start="common")
+
+
+def restore_file(filename, variant):
+    common_filename = os.path.join("common", filename)
+    current_filename = os.path.join("current", filename)
+    os.makedirs(os.path.dirname(current_filename), exist_ok=True)
+    with open(common_filename) as common, open(current_filename, 'w') as current:
+        for line in common:
+            if line.startswith("----- "):
+                print("found template line")
+            else:
+                current.write(line)
+
+
+@with_logging
+def restore_variant(variant):
+    sh.rm("-rf", "current")
+    sh.mkdir("current")
+    for filename in common_files():
+        restore_file(filename, variant)
 
 
 @add_to_dispatch
 @with_logging
 def install():
+    restore_variant(select_variant())
     link()
     plug_install()
 
@@ -81,28 +99,6 @@ def install():
 def uninstall():
     plug_uninstall()
     unlink()
-
-
-@add_to_dispatch
-@with_logging
-def reset_to_common():
-    sh.rm("-rf", "current")
-    sh.cp("-R", "common", "current")
-
-
-@add_to_dispatch
-@with_logging
-def store(variant):
-    sh.diff("-ruN", "common", "current", _out=diff_file(variant), _ok_code=[0, 1])
-
-
-@add_to_dispatch
-@with_logging
-def restore(variant):
-    unlink()
-    reset_to_common()
-    sh.patch("--directory=current", "--strip=1", _in=open(diff_file(variant)))
-    link()
 
 
 if __name__ == "__main__":
