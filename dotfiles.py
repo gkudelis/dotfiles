@@ -70,12 +70,32 @@ def restore_file(filename, variant):
     common_filename = os.path.join("common", filename)
     current_filename = os.path.join("current", filename)
     os.makedirs(os.path.dirname(current_filename), exist_ok=True)
+
     with open(common_filename) as common, open(current_filename, 'w') as current:
         for line in common:
             if line.startswith("----- "):
-                print("found template line")
+                partial_path = resolve_partial_path(line[6:-1], variant)
+                print(partial_path)
+                if partial_path is not None:
+                    with open(partial_path) as partial_content:
+                        for partial_line in partial_content:
+                            current.write(partial_line)
             else:
                 current.write(line)
+
+
+def resolve_partial_path(partial_name, variant):
+    variant_partial_path = os.path.join('variants', variant, partial_name)
+    default_partial_path = os.path.join('variants', 'default', partial_name)
+    print(variant_partial_path)
+    print(default_partial_path)
+
+    if os.path.exists(variant_partial_path):
+        return variant_partial_path
+    elif os.path.exists(default_partial_path):
+        return default_partial_path
+    else:
+        return None
 
 
 @with_logging
