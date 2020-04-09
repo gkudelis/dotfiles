@@ -1,0 +1,1 @@
+nnoremap <leader>s :!tmux new-window 'vspec % && cat'<cr>

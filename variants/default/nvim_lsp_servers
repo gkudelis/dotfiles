@@ -1,0 +1,2 @@
+\ 'rust': ['rustup', 'run', 'stable', 'rls'],
+\ 'ruby': ['solargraph', 'stdio'],

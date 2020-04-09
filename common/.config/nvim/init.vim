@@ -104,8 +104,11 @@ let g:vim_markdown_folding_disabled = 1
 set mouse=""
 set clipboard^=unnamed,unnamedplus
 
+" running rspec
+----- nvim_rspec
+
 " python
-let g:python3_host_prog="/usr/local/bin/python3"
+----- nvim_python
 
 " language server commands
 nmap <leader>d :call LanguageClient_textDocument_definition()<CR>
@@ -117,9 +120,8 @@ set completeopt=noinsert,menuone,noselect
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'ruby': ['solargraph', 'stdio'],
-    \ }
+----- nvim_lsp_servers
+\ }
 
 " syntactic setup
 set statusline+=%#warningmsg#

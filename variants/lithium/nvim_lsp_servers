@@ -1,0 +1,2 @@
+\ 'rust': ['rustup', 'run', 'stable', 'rls'],
+\ 'ruby': [expand('~/bin/ruby_language_server.sh')],
