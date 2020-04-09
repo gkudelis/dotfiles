@@ -75,7 +75,6 @@ def restore_file(filename, variant):
         for line in common:
             if line.startswith("----- "):
                 partial_path = resolve_partial_path(line[6:-1], variant)
-                print(partial_path)
                 if partial_path is not None:
                     with open(partial_path) as partial_content:
                         for partial_line in partial_content:
@@ -87,8 +86,6 @@ def restore_file(filename, variant):
 def resolve_partial_path(partial_name, variant):
     variant_partial_path = os.path.join('variants', variant, partial_name)
     default_partial_path = os.path.join('variants', 'default', partial_name)
-    print(variant_partial_path)
-    print(default_partial_path)
 
     if os.path.exists(variant_partial_path):
         return variant_partial_path

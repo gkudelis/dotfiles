@@ -1,3 +1,5 @@
+alias dhttp='docker run --rm -it --network=vinted_default --env JWT_AUTH_TOKEN teracy/httpie-jwt-auth'
+
 export LIBRARY_PATH="${LD_LIBRARY_PATH:+LD_LIBRARY_PATH:}/usr/local/opt/openssl@1.1/lib/"
 
 eval "$(rbenv init -)"
