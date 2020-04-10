@@ -10,5 +10,3 @@ dev-tools() {
 }
 
 export PATH="$PATH:$HOME/bin"
-
-eval "$(direnv hook zsh)"
