@@ -9,6 +9,7 @@
     co = checkout
     ci = commit
     ce = commit --allow-empty
+    dc = diff --cached
     st = status
     br = branch
     rv = revert
