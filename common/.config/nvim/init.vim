@@ -22,8 +22,8 @@ Plug 'roxma/vim-tmux-clipboard'
 
 " nice multi-function plugins
 Plug 'tpope/vim-sensible'
-Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/syntastic'
+"Plug 'sheerun/vim-polyglot'
+"Plug 'scrooloose/syntastic'
 
 " great for clojure
 "Plug 'tpope/vim-classpath'
@@ -35,9 +35,11 @@ Plug 'scrooloose/syntastic'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" autocompletion
+" autocompletion and snippets
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'SirVer/ultisnips'
 Plug 'autozimu/LanguageClient-neovim', {
   \ 'branch': 'next',
   \ 'do': 'bash install.sh',
@@ -111,14 +113,21 @@ set clipboard^=unnamed,unnamedplus
 ----- nvim_python
 
 " language server commands
-nmap <leader>d :call LanguageClient_textDocument_definition()<CR>
-nmap <leader>h :call LanguageClient_textDocument_hover()<CR>
+nmap <leader>m <Plug>(lcn-menu)
+nmap <leader>d <Plug>(lcn-definition)
+nmap <leader>h <Plug>(lcn-hover)
+nmap <leader>e <Plug>(lcn-explain-error)
 
 " autocompletion setup
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" snippet expansion and navigation
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+let g:UltiSnipsJumpForwardTrigger = "<Tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+
+" language server commands
+let g:LanguageClient_hasSnippetSupport = 1
 let g:LanguageClient_serverCommands = {
 ----- nvim_lsp_servers
 \ }
