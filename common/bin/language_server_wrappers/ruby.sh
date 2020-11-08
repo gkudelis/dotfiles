@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bundle exec solargraph
+bundle exec solargraph stdio
 
 #docker-compose \
 #    --file ~/------/dev-tools/docker/docker-compose.yml \
