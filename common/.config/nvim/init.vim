@@ -9,31 +9,31 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 " Plug 'Yggdroot/indentLine'
-Plug 'jeetsukumaran/vim-buffergator'
+" Plug 'jeetsukumaran/vim-buffergator'
 Plug 'mattn/emmet-vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'plasticboy/vim-markdown'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
-" better grepping and finding
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-Plug 'tpope/vim-fireplace'
-Plug 'scrooloose/syntastic'
 Plug 'roxma/vim-tmux-clipboard'
 
 " nice multi-function plugins
 Plug 'tpope/vim-sensible'
 Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/syntastic'
 
 " great for clojure
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
+"Plug 'tpope/vim-classpath'
+"Plug 'tpope/vim-fireplace'
+"Plug 'guns/vim-sexp'
+"Plug 'tpope/vim-sexp-mappings-for-regular-people'
+
+" better grepping and finding
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " autocompletion
 Plug 'roxma/nvim-yarp'
