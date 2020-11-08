@@ -1,2 +1,2 @@
-\ 'rust': ['rustup', 'run', 'stable', 'rls'],
+\ 'rust': [expand('~/bin/language_server_wrappers/rust.sh')],
 \ 'ruby': [expand('~/bin/ruby_language_server.sh')],
