@@ -46,9 +46,6 @@ Plug 'autozimu/LanguageClient-neovim', {
   \ 'do': 'bash install.sh',
   \ }
 
-" Plug 'aserebryakov/vim-todo-lists'
-Plug 'chmp/mdnav'
-
 call plug#end()
 
 set laststatus=2
