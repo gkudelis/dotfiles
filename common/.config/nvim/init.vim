@@ -22,6 +22,7 @@ Plug 'roxma/vim-tmux-clipboard'
 
 " nice multi-function plugins
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-eunuch'
 "Plug 'sheerun/vim-polyglot'
 "Plug 'scrooloose/syntastic'
 
@@ -46,6 +47,7 @@ Plug 'autozimu/LanguageClient-neovim', {
   \ }
 
 " Plug 'aserebryakov/vim-todo-lists'
+Plug 'chmp/mdnav'
 
 call plug#end()
 
@@ -96,6 +98,11 @@ nmap <leader>a :Ag
 nmap <leader>f :Files<cr>
 nmap ; :Buffers<cr>
 vmap a y:Ag <C-R>"<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit',
+  \ 'ctrl-y': {lines -> setreg('*', join(lines, "\n"))}}
 
 " visual selection pipe to some command
 vmap \| ::w !
@@ -113,10 +120,10 @@ set clipboard^=unnamed,unnamedplus
 ----- nvim_python
 
 " language server commands
-nmap <leader>m <Plug>(lcn-menu)
-nmap <leader>d <Plug>(lcn-definition)
-nmap <leader>h <Plug>(lcn-hover)
-nmap <leader>e <Plug>(lcn-explain-error)
+nmap <leader>lm <Plug>(lcn-menu)
+nmap <leader>ld <Plug>(lcn-definition)
+nmap <leader>lh <Plug>(lcn-hover)
+nmap <leader>le <Plug>(lcn-explain-error)
 
 " autocompletion setup
 autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -141,3 +148,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" operations on current file name
+nmap <leader>cy :let @+=expand('%')<CR>
