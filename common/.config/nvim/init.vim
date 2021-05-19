@@ -94,7 +94,7 @@ nmap <leader>gs :G<cr>
 nmap <leader>a :Ag 
 nmap <leader>f :Files<cr>
 nmap ; :Buffers<cr>
-vmap a y:Ag <C-R>"<CR>
+vmap <leader>a y:Ag <C-R>"<CR>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
@@ -146,5 +146,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" operations on current file name
+" operations to help with zettel
 nmap <leader>cy :let @+=expand('%')<CR>
+nmap <leader>za :Ag <C-R>=expand('%')<CR><CR>
+nmap <leader>zn :e <C-R>=strftime("~/zettel/%Y-%m-%d-%H%M.md")<CR><CR>
