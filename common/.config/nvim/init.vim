@@ -148,6 +148,6 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " operations to help with zettel
-nmap <leader>cy :let @+=expand('%')<CR>
-nmap <leader>za :Ag <C-R>=expand('%')<CR><CR>
-nmap <leader>zn :e <C-R>=strftime("~/zettel/%Y-%m-%d-%H%M.md")<CR><CR>
+nmap <leader>cy :let @+=expand('%:t')<CR>
+nmap <leader>za :Ag <C-R>=expand('%:t')<CR><CR>
+nmap <leader>zn :e <C-R>=strftime("~/zettel/%Y-%m-%d-%H%M%S.md")<CR><CR>
