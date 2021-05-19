@@ -84,7 +84,8 @@ set guioptions-=r
 set guioptions-=b
 
 " NERDtree mapping
-nmap <leader>n :NERDTree<cr>
+nmap <leader>no :NERDTree<cr>
+nmap <leader>nt :NERDTreeFind<cr>
 
 " git fugitive stuff
 nmap <leader>gb :Gblame<cr>
