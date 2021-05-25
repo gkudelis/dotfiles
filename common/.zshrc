@@ -50,4 +50,5 @@ eval "$(direnv hook zsh)"
 ----- zshrc_pass_db
 export PASS_DB
 
+export PATH="$PATH:$HOME/bin"
 ----- zshrc_misc
