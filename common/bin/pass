@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# strict mode
+set -euo pipefail
+IFS=$'\n\t'
+
+# query for password
+query=${1:-}
+if [[ -z "$query" ]]; then
+    echo "Usage: $0 query"
+    exit 1
+fi
+
+# get password
+echo -n "Password: "
+read -s password
+echo
+
+# get matching options, choose entry and copy password
+options=$(yes $password | keepassxc-cli locate $PASS_DB $query || true)
+select choice in $options
+do
+    yes $password | keepassxc-cli show -a password $PASS_DB $choice | pbcopy || true
+    break
+done
+
+# clean up afterwards
+echo "Password copied, will be replaced in 10s"
+sleep 10
+echo "" | pbcopy

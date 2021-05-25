@@ -47,4 +47,7 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 
 eval "$(direnv hook zsh)"
 
+----- zshrc_pass_db
+export PASS_DB
+
 ----- zshrc_misc
