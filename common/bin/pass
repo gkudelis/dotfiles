@@ -18,6 +18,11 @@ echo
 
 # get matching options, choose entry and copy password
 options=$(yes $password | keepassxc-cli locate $PASS_DB $query || true)
+if [[ -z "$options" ]]; then
+    exit 1
+fi
+
+# choose from options
 select choice in $options
 do
     yes $password | keepassxc-cli show -a password $PASS_DB $choice | pbcopy || true
