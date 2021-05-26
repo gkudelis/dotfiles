@@ -29,6 +29,7 @@ def install():
     variant = get_variant()
     if variant:
         restore_variant(get_variant())
+        fetch_p10k()
         link()
         plug_install()
     else:
@@ -60,6 +61,13 @@ def plug_install():
 def plug_uninstall():
     plugged_path = os.path.join(os.environ['HOME'], '.config/nvim/plugged')
     sh.rm('-rf', plugged_path)
+
+
+@with_logging
+def fetch_p10k():
+    repository_url = 'https://github.com/romkatv/powerlevel10k.git'
+    checkout_path = os.path.join(os.environ['HOME'], 'powerlevel10k')
+    sh.git.clone('--depth=1', repository_url , checkout_path)
 
 
 @with_logging
