@@ -41,6 +41,7 @@ def install():
 def uninstall():
     plug_uninstall()
     unlink()
+    remove_p10k()
 
 
 @cli.command()
@@ -68,6 +69,12 @@ def fetch_p10k():
     repository_url = 'https://github.com/romkatv/powerlevel10k.git'
     checkout_path = os.path.join(os.environ['HOME'], 'powerlevel10k')
     sh.git.clone('--depth=1', repository_url , checkout_path)
+
+
+@with_logging
+def remove_p10k():
+    checkout_path = os.path.join(os.environ['HOME'], 'powerlevel10k')
+    sh.rm('-rf', checkout_path)
 
 
 @with_logging
