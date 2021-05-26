@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+import click
 from functools import wraps
 import glob
 import os
@@ -9,25 +9,6 @@ import sys
 VARIANT_FILENAME = 'current_variant'
 
 
-commands = dict()
-
-
-def explain_usage():
-    print('Available commands: {}'.format(', '.join(commands.keys())))
-
-
-def add_to_dispatch(f):
-    commands[f.__name__] = f
-    return f
-
-
-def dispatch(command, *args):
-    if command in commands:
-        commands[command](*args)
-    else:
-        explain_usage()
-
-
 def with_logging(f):
     @wraps(f)
     def wrapped(*args):
@@ -35,6 +16,39 @@ def with_logging(f):
         f(*args)
         print('Finish {}'.format(f.__name__))
     return wrapped
+
+
+@click.group()
+def cli():
+    pass
+
+
+@cli.command()
+@with_logging
+def install():
+    variant = get_variant()
+    if variant:
+        restore_variant(get_variant())
+        link()
+        plug_install()
+    else:
+        print('Variant does not exist')
+
+
+@cli.command()
+@with_logging
+def uninstall():
+    plug_uninstall()
+    unlink()
+
+
+@cli.command()
+@click.argument('new_variant', required=False)
+def variant(new_variant):
+    if new_variant:
+        set_variant(new_variant)
+    else:
+        print(get_variant())
 
 
 @with_logging
@@ -114,37 +128,3 @@ def restore_variant(variant):
     sh.mkdir('current')
     for filename in common_files():
         restore_file(filename, variant)
-
-
-@add_to_dispatch
-def variant(new_variant=None):
-    if new_variant:
-        set_variant(new_variant)
-    else:
-        print(get_variant())
-
-
-@add_to_dispatch
-@with_logging
-def install():
-    variant = get_variant()
-    if variant:
-        restore_variant(get_variant())
-        link()
-        plug_install()
-    else:
-        print('Variant does not exist')
-
-
-@add_to_dispatch
-@with_logging
-def uninstall():
-    plug_uninstall()
-    unlink()
-
-
-if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        dispatch(*sys.argv[1:])
-    else:
-        explain_usage()
