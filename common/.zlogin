@@ -1,1 +1,0 @@
------ zlogin_gpg_agent
