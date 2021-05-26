@@ -111,9 +111,6 @@ let g:vim_markdown_folding_disabled = 1
 set mouse=""
 set clipboard^=unnamed,unnamedplus
 
-" running rspec
------ nvim_rspec
-
 " python
 ----- nvim_python
 

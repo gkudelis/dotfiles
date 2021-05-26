@@ -1,10 +1,10 @@
 [user]
 	name = Giedrius Kudelis
------ gitconfig_email
+	email = giedrius.kudelis@gmail.com
 [core]
 	autocrlf = input
 	safecrlf = false
------ gitconfig_editor
+	editor = /usr/bin/vim
 [alias]
     co = checkout
     ci = commit

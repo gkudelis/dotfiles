@@ -1,1 +1,1 @@
-set-option -g default-shell /Users/giedrius/.nix-profile/bin/zsh
+set-option -g default-shell /usr/local/bin/zsh

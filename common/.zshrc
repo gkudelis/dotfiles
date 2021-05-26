@@ -4,6 +4,7 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
 # Hostory books
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -28,10 +29,10 @@ zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 # Correct me if I'm wrong!
 setopt correct
 
-# Prompt
-autoload -U promptinit
-promptinit
-prompt adam2
+## Prompt
+#autoload -U promptinit
+#promptinit
+#prompt adam2
 
 # No comment
 alias l='ls'
