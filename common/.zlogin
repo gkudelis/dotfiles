@@ -1,1 +1,1 @@
-eval $(gpg-agent --daemon)
+----- zlogin_gpg_agent
