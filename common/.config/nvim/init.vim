@@ -23,6 +23,7 @@ Plug 'roxma/vim-tmux-clipboard'
 " nice multi-function plugins
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-eunuch'
+Plug 'dkarter/bullets.vim'
 "Plug 'sheerun/vim-polyglot'
 "Plug 'scrooloose/syntastic'
 
@@ -148,3 +149,6 @@ let g:syntastic_check_on_wq = 0
 nmap <leader>cy :let @+=expand('%:t')<CR>
 nmap <leader>za :Ag <C-R>=expand('%:t')<CR><CR>
 nmap <leader>zn :e <C-R>=strftime("~/zettel/%Y-%m-%d-%H%M%S.md")<CR><CR>
+
+" 2 space indentation for yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
