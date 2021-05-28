@@ -42,6 +42,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'autozimu/LanguageClient-neovim', {
   \ 'branch': 'next',
   \ 'do': 'bash install.sh',
@@ -125,9 +126,9 @@ nmap <leader>le <Plug>(lcn-explain-error)
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 " snippet expansion and navigation
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-let g:UltiSnipsJumpForwardTrigger = "<Tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+set runtimepath+=~/.config/nvim/ged-snippets/
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-b>"
 
 " language server commands
 let g:LanguageClient_hasSnippetSupport = 1
