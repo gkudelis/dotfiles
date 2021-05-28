@@ -41,6 +41,7 @@ alias la='ls -la'
 alias lh='ls -lh'
 
 alias dodo='docker run --rm -it -v "$PWD:$PWD" -w "$PWD" -u $(id -u):$(id -g)'
+alias ranger='ranger --choosedir=$HOME/.rangerdir; cd $(cat $HOME/.rangerdir)'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey -r "^T"
