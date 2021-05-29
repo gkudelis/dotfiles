@@ -37,12 +37,13 @@ Plug 'dkarter/bullets.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" autocompletion and snippets
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-ultisnips'
+" snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+" autocompletion
+Plug 'roxma/nvim-yarp'
+Plug 'Shougo/deoplete.nvim'
 Plug 'autozimu/LanguageClient-neovim', {
   \ 'branch': 'next',
   \ 'do': 'bash install.sh',
@@ -123,12 +124,12 @@ nmap <leader>lh <Plug>(lcn-hover)
 nmap <leader>le <Plug>(lcn-explain-error)
 
 " autocompletion setup
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
+let g:deoplete#enable_at_startup = 1
+
 " snippet expansion and navigation
+let g:UltiSnipsJumpForwardTrigger = "<c-f>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
 set runtimepath+=~/.config/nvim/ged-snippets/
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-b>"
 
 " language server commands
 let g:LanguageClient_hasSnippetSupport = 1
