@@ -49,6 +49,8 @@ Plug 'autozimu/LanguageClient-neovim', {
   \ 'do': 'bash install.sh',
   \ }
 
+Plug 'lambdalisue/suda.vim'
+
 call plug#end()
 
 set laststatus=2
@@ -154,3 +156,5 @@ nmap <leader>zn :e <C-R>=strftime("~/zettel/%Y-%m-%d-%H%M%S.md")<CR><CR>
 
 " 2 space indentation for yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+let g:suda_smart_edit = 1
