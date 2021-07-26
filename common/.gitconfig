@@ -11,6 +11,7 @@
     ce = commit --allow-empty
     dc = diff --cached
     st = status
+    sw = switch
     br = branch
     rv = revert
     pl = pull
