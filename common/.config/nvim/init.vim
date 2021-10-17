@@ -7,79 +7,139 @@ endif
 
 call plug#begin()
 
-Plug 'altercation/vim-colors-solarized'
-" Plug 'Yggdroot/indentLine'
-" Plug 'jeetsukumaran/vim-buffergator'
-Plug 'mattn/emmet-vim'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'plasticboy/vim-markdown'
-Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-
-Plug 'roxma/vim-tmux-clipboard'
-
-" nice multi-function plugins
+" --- defaults
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-eunuch'
-Plug 'dkarter/bullets.vim'
+
+" --- display
+Plug 'altercation/vim-colors-solarized'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'itchyny/lightline.vim'
+
+" --- filesystem
+Plug 'scrooloose/nerdtree'
+Plug 'lambdalisue/suda.vim'
+"Plug 'tpope/vim-eunuch'
+
+" --- git
+Plug 'tpope/vim-fugitive'
+
+" --- stuff - may want to remove maybe?
+"Plug 'dkarter/bullets.vim'
+"Plug 'plasticboy/vim-markdown'
+"Plug 'mattn/emmet-vim'
 "Plug 'sheerun/vim-polyglot'
 "Plug 'scrooloose/syntastic'
 
-" great for clojure
-"Plug 'tpope/vim-classpath'
-"Plug 'tpope/vim-fireplace'
-"Plug 'guns/vim-sexp'
-"Plug 'tpope/vim-sexp-mappings-for-regular-people'
+" --- structured editing for sexp
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 
-" better grepping and finding
+" --- fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" snippets
+" --- snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-" autocompletion
-Plug 'roxma/nvim-yarp'
-Plug 'Shougo/deoplete.nvim'
-Plug 'autozimu/LanguageClient-neovim', {
-  \ 'branch': 'next',
-  \ 'do': 'bash install.sh',
-  \ }
+" --- autocompletion
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
-Plug 'lambdalisue/suda.vim'
+" --- LSP client
+Plug 'neovim/nvim-lspconfig'
+"Plug 'autozimu/LanguageClient-neovim', {
+"  \ 'branch': 'next',
+"  \ 'do': 'bash install.sh',
+"  \ }
+
+" --- language support
+Plug 'bakpakin/fennel.vim'
 
 call plug#end()
 
-set laststatus=2
-set noshowmode
+" --- display
+"set t_Co=256
+let g:lightline = { 'colorscheme': 'solarized' }
 
+" --- filesystem
+nnoremap <leader>no :NERDTree<cr>
+nnoremap <leader>nt :NERDTreeFind<cr>
+let g:suda_smart_edit = 1
+
+" --- git
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gs :G<cr>
+
+" --- stuff
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
+" --- fzf
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit',
+  \ 'ctrl-y': {lines -> setreg('*', join(lines, "\n"))}}
+nnoremap <leader>a :Ag 
+nnoremap <leader>f :Files<cr>
+nnoremap ; :Buffers<cr>
+vnoremap <leader>a y:Ag <C-R>"<CR>
+
+" --- snippets
+let g:UltiSnipsJumpForwardTrigger = "<c-f>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
+set runtimepath+=~/.config/nvim/ged-snippets/
+
+" --- autocompletion
+let g:deoplete#enable_at_startup = 1
+
+" --- language client support
+"let g:LanguageClient_hasSnippetSupport = 1
+"let g:LanguageClient_serverCommands = {
+"\ }
+"nnoremap <leader>lm <Plug>(lcn-menu)
+"nnoremap <leader>ld <Plug>(lcn-definition)
+"nnoremap <leader>lh <Plug>(lcn-hover)
+"nnoremap <leader>le <Plug>(lcn-explain-error)
+
+" --- LSP client
+lua << EOF
+require'lspconfig'.pylsp.setup{}
+require'lspconfig'.rust_analyzer.setup{}
+EOF
+
+set background=dark
+colorscheme solarized
+
+set noshowmode
 set number
 set relativenumber
-set autoindent
-
 set hidden
-
 set wrap
 set linebreak
 set nolist
 
 set colorcolumn=80
+"set cursorline
 
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
-set background=dark
-silent! colorscheme solarized
-"set cursorline
-set t_Co=256
-let g:lightline = { 'colorscheme': 'solarized' }
-
 set wildmode=longest,list,full
-set wildmenu
 
 set winaltkeys=no
 set guioptions-=m
@@ -88,27 +148,8 @@ set guioptions-=l
 set guioptions-=r
 set guioptions-=b
 
-" NERDtree mapping
-nmap <leader>no :NERDTree<cr>
-nmap <leader>nt :NERDTreeFind<cr>
-
-" git fugitive stuff
-nmap <leader>gb :Gblame<cr>
-nmap <leader>gs :G<cr>
-
-" ag and fzf
-nmap <leader>a :Ag 
-nmap <leader>f :Files<cr>
-nmap ; :Buffers<cr>
-vmap <leader>a y:Ag <C-R>"<CR>
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit',
-  \ 'ctrl-y': {lines -> setreg('*', join(lines, "\n"))}}
-
 " visual selection pipe to some command
-vmap \| ::w !
+vnoremap \| ::w !
 
 set conceallevel=2
 let g:vim_markdown_folding_disabled = 1
@@ -119,44 +160,10 @@ set clipboard^=unnamed,unnamedplus
 " python
 ----- nvim_python
 
-" language server commands
-nmap <leader>lm <Plug>(lcn-menu)
-nmap <leader>ld <Plug>(lcn-definition)
-nmap <leader>lh <Plug>(lcn-hover)
-nmap <leader>le <Plug>(lcn-explain-error)
-
-" autocompletion setup
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#ignore_sources = {}
-let g:deoplete#ignore_sources._ = ['buffer', 'around']
-
-" snippet expansion and navigation
-let g:UltiSnipsJumpForwardTrigger = "<c-f>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
-set runtimepath+=~/.config/nvim/ged-snippets/
-
-" language server commands
-let g:LanguageClient_hasSnippetSupport = 1
-let g:LanguageClient_serverCommands = {
------ nvim_lsp_servers
-\ }
-
-" syntactic setup
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " operations to help with zettel
-nmap <leader>cy :let @+=expand('%:t')<CR>
-nmap <leader>za :Ag <C-R>=expand('%:t')<CR><CR>
-nmap <leader>zn :e <C-R>=strftime("~/zettel/%Y-%m-%d-%H%M%S.md")<CR><CR>
+nnoremap <leader>cy :let @+=expand('%:t')<CR>
+nnoremap <leader>za :Ag <C-R>=expand('%:t')<CR><CR>
+nnoremap <leader>zn :e <C-R>=strftime("~/zettel/%Y-%m-%d-%H%M%S.md")<CR><CR>
 
 " 2 space indentation for yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-let g:suda_smart_edit = 1
