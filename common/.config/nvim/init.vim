@@ -10,6 +10,9 @@ call plug#begin()
 " --- defaults
 Plug 'tpope/vim-sensible'
 
+" --- fennel configuration
+Plug 'Olical/aniseed', { 'tag': 'v3.23.0' }
+
 " --- display
 Plug 'altercation/vim-colors-solarized'
 Plug 'ntpeters/vim-better-whitespace'
@@ -60,10 +63,17 @@ Plug 'neovim/nvim-lspconfig'
 "  \ 'do': 'bash install.sh',
 "  \ }
 
-" --- language support
+" --- interactive evaluation (REPL)
 Plug 'bakpakin/fennel.vim'
+Plug 'Olical/conjure', {'tag': 'v4.25.0'}
+
+" --- language support
 
 call plug#end()
+
+" --- leaders
+let mapleader = "\\"
+let maplocalleader = ","
 
 " --- display
 "set t_Co=256
