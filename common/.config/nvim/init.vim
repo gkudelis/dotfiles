@@ -129,6 +129,7 @@ let g:deoplete#enable_at_startup = 1
 lua << EOF
 require'lspconfig'.pylsp.setup{}
 require'lspconfig'.rust_analyzer.setup{}
+require'lspconfig'.clojure_lsp.setup{}
 EOF
 
 set background=dark
