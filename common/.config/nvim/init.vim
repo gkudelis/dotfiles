@@ -67,7 +67,9 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'bakpakin/fennel.vim'
 Plug 'Olical/conjure', {'tag': 'v4.25.0'}
 
-" --- language support
+" vimwiki + zettel
+Plug 'vimwiki/vimwiki'
+Plug 'michal-h21/vim-zettel'
 
 call plug#end()
 
@@ -172,9 +174,15 @@ set clipboard^=unnamed,unnamedplus
 ----- nvim_python
 
 " operations to help with zettel
-nnoremap <leader>cy :let @+=expand('%:t')<CR>
-nnoremap <leader>za :Ag <C-R>=expand('%:t')<CR><CR>
-nnoremap <leader>zn :e <C-R>=strftime("~/zettel/%Y-%m-%d-%H%M%S.md")<CR><CR>
+"nnoremap <leader>cy :let @+=expand('%:t')<CR>
+"nnoremap <leader>za :Ag <C-R>=expand('%:t')<CR><CR>
+nnoremap <leader>zn :ZettelNew 
+
+let g:vimwiki_list = [{'path': '~/zettel/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_markdown_link_ext = 1
+let g:zettel_options = [{'frontmatter': [['tags', '']]}]
+let g:zettel_format = "%Y-%m-%d-%H%M%S"
+let g:zettel_date_format = "%Y-%m-%d"
 
 " 2 space indentation for yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
