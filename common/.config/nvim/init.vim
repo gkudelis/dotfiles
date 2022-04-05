@@ -89,6 +89,7 @@ let g:suda_smart_edit = 1
 " --- git
 nnoremap <leader>g :G<cr>
 nnoremap <leader>gb :G blame<cr>
+nnoremap <leader>gp :G push<cr>
 
 " --- stuff
 "set statusline+=%#warningmsg#
