@@ -87,8 +87,8 @@ nnoremap <leader>nt :NERDTreeFind<cr>
 let g:suda_smart_edit = 1
 
 " --- git
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gs :G<cr>
+nnoremap <leader>g :G<cr>
+nnoremap <leader>gb :G blame<cr>
 
 " --- stuff
 "set statusline+=%#warningmsg#
