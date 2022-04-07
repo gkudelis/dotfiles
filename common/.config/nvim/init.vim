@@ -181,7 +181,7 @@ nnoremap <leader>zn :ZettelNew
 
 let g:vimwiki_list = [{'path': '~/zettel/', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_markdown_link_ext = 1
-let g:zettel_options = [{'frontmatter': [['tags', '']]}]
+let g:zettel_options = [{'front_matter': [['tags', '']]}]
 let g:zettel_format = "%Y-%m-%d-%H%M%S"
 let g:zettel_date_format = "%Y-%m-%d"
 
