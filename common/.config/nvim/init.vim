@@ -179,10 +179,12 @@ set clipboard^=unnamed,unnamedplus
 "nnoremap <leader>cy :let @+=expand('%:t')<CR>
 "nnoremap <leader>za :Ag <C-R>=expand('%:t')<CR><CR>
 nnoremap <leader>zn :ZettelNew 
+nnoremap <leader>zb :ZettelBackLinks<CR>
+nnoremap <leader>zt :VimwikiSearchTags 
 
-let g:vimwiki_list = [{'path': '~/zettel/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/zettel/', 'syntax': 'markdown', 'ext': '.md', 'auto_tags': 1}]
 let g:vimwiki_markdown_link_ext = 1
-let g:zettel_options = [{'front_matter': [['tags', '']]}]
+let g:zettel_options = [{'front_matter': [['tags', ':stub: :unlinked:']]}]
 let g:zettel_format = "%Y-%m-%d-%H%M%S"
 let g:zettel_date_format = "%Y-%m-%d"
 
