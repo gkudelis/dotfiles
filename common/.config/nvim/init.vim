@@ -70,7 +70,7 @@ Plug 'Olical/conjure', {'tag': 'v4.25.0'}
 " vimwiki + zettel
 Plug 'vimwiki/vimwiki'
 Plug 'michal-h21/vim-zettel'
-Plug 'michal-h21/vimwiki-sync'
+"Plug 'michal-h21/vimwiki-sync'
 
 call plug#end()
 
