@@ -187,7 +187,7 @@ nnoremap <leader>zs :VimwikiSearchTags stub<CR>:lopen<CR>
 " let g:vimwiki_list = [{'path': '~/zettel/', 'syntax': 'markdown', 'ext': '.md', 'auto_tags': 1}]
 let g:vimwiki_list = [{'path': '~/zettel/', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_markdown_link_ext = 1
-let g:zettel_options = [{'front_matter': [['tags', ':stub: :unlinked:']]}]
+let g:zettel_options = [{'front_matter': [['tags', ':stub: :inbox:']]}]
 let g:zettel_format = "%Y-%m-%d-%H%M%S"
 let g:zettel_date_format = "%Y-%m-%d"
 
