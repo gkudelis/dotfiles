@@ -167,6 +167,7 @@ set guioptions-=b
 vnoremap \| ::w !
 
 set conceallevel=2
+set concealcursor=nc
 let g:vim_markdown_folding_disabled = 1
 
 set mouse=""
