@@ -9,6 +9,7 @@
     co = checkout
     ci = commit
     ce = commit --allow-empty
+    cam = commit -am
     dc = diff --cached
     st = status
     sw = switch
