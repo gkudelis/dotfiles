@@ -26,13 +26,6 @@ Plug 'lambdalisue/suda.vim'
 " --- git
 Plug 'tpope/vim-fugitive'
 
-" --- stuff - may want to remove maybe?
-"Plug 'dkarter/bullets.vim'
-"Plug 'plasticboy/vim-markdown'
-"Plug 'mattn/emmet-vim'
-"Plug 'sheerun/vim-polyglot'
-"Plug 'scrooloose/syntastic'
-
 " --- structured editing for sexp
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'guns/vim-sexp'
@@ -43,25 +36,16 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" --- snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" --- LSP configuration
+Plug 'neovim/nvim-lspconfig'
 
 " --- autocompletion
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
 
-" --- LSP client
-Plug 'neovim/nvim-lspconfig'
-"Plug 'autozimu/LanguageClient-neovim', {
-"  \ 'branch': 'next',
-"  \ 'do': 'bash install.sh',
-"  \ }
+" --- snippets
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
 
 " --- interactive evaluation (REPL)
 Plug 'bakpakin/fennel.vim'
@@ -113,12 +97,12 @@ nnoremap ; :Buffers<cr>
 vnoremap <leader>a y:Ag <C-R>"<CR>
 
 " --- snippets
-let g:UltiSnipsJumpForwardTrigger = "<c-f>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
-set runtimepath+=~/.config/nvim/ged-snippets/
+" let g:UltiSnipsJumpForwardTrigger = "<c-f>"
+" let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
+" set runtimepath+=~/.config/nvim/ged-snippets/
 
 " --- autocompletion
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1
 
 " --- language client support
 "let g:LanguageClient_hasSnippetSupport = 1
@@ -128,13 +112,6 @@ let g:deoplete#enable_at_startup = 1
 "nnoremap <leader>ld <Plug>(lcn-definition)
 "nnoremap <leader>lh <Plug>(lcn-hover)
 "nnoremap <leader>le <Plug>(lcn-explain-error)
-
-" --- LSP client
-lua << EOF
-require'lspconfig'.pylsp.setup{}
-require'lspconfig'.rust_analyzer.setup{}
-require'lspconfig'.clojure_lsp.setup{}
-EOF
 
 set background=dark
 colorscheme solarized
@@ -194,3 +171,91 @@ let g:zettel_date_format = "%Y-%m-%d"
 
 " 2 space indentation for yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" --- LSP and autocomplete
+" --- (see https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion)
+lua << EOF
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+end
+
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+
+-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+local lspconfig = require('lspconfig')
+local servers = { 'pylsp', 'solargraph', 'rust_analyzer', 'clojure_lsp' }
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+end
+
+-- luasnip setup
+local luasnip = require 'luasnip'
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    -- ['<C-Space>'] = cmp.mapping.complete(),
+    -- ['<Tab>'] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_next_item()
+    --   elseif luasnip.expand_or_jumpable() then
+    --     luasnip.expand_or_jump()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
+    -- ['<S-Tab>'] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_prev_item()
+    --   elseif luasnip.jumpable(-1) then
+    --     luasnip.jump(-1)
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
+  }),
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+}
+
+EOF
