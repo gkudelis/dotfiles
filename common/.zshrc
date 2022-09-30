@@ -42,6 +42,7 @@ alias lh='ls -lh'
 
 alias dodo='docker run --rm -it -v "$PWD:$PWD" -w "$PWD" -u $(id -u):$(id -g)'
 alias ranger='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"'
+alias owner='code_owners | grep'
 
 function pt { pstree $(pgrep "$1") }
 
