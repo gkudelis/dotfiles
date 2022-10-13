@@ -1,3 +1,4 @@
+test
 # Installation
 
 To instal the `dotfiles` utility run
