@@ -51,6 +51,9 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'bakpakin/fennel.vim'
 Plug 'Olical/conjure', {'tag': 'v4.25.0'}
 
+" --- key map suggestions
+Plug 'liuchengxu/vim-which-key'
+
 " vimwiki + zettel
 Plug 'vimwiki/vimwiki'
 Plug 'michal-h21/vim-zettel'
@@ -61,6 +64,8 @@ call plug#end()
 " --- leaders
 let mapleader = "\\"
 let maplocalleader = ","
+nnoremap <silent> <leader> :<c-u>WhichKey "\\"<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
 " --- display
 "set t_Co=256
