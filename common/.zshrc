@@ -60,6 +60,7 @@ eval "$(direnv hook zsh)"
 export PASS_DB
 
 export PATH="$PATH:$HOME/bin"
+export EDITOR=nvim
 
 ----- zshrc_misc
 
