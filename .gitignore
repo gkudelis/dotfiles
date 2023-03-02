@@ -3,3 +3,4 @@ current_variant
 .venv
 cli/dotfiles.egg-info
 cli/__pycache__
+.dotfiles
