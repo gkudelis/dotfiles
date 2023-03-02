@@ -52,17 +52,20 @@ bindkey -r "^R"
 bindkey "^F" fzf-file-widget
 bindkey "^H" fzf-history-widget
 
------ zshrc_gpg_agent
 
 eval "$(direnv hook zsh)"
 
------ zshrc_pass_db
+PASS_DB=$HOME/Sync/Passwords.kdbx
 export PASS_DB
 
 export PATH="$PATH:$HOME/bin"
 export EDITOR=nvim
 
------ zshrc_misc
+alias dhttp='docker run --rm -it --network=vinted_default --env JWT_AUTH_TOKEN teracy/httpie-jwt-auth'
+
+eval "$(rbenv init -)"
+
+source "${DEVTOOLS_PATH:-$HOME/vinted/dev-tools}/bin/shell_function.sh"
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

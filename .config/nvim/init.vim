@@ -156,7 +156,7 @@ set mouse=""
 set clipboard^=unnamed,unnamedplus
 
 " python
------ nvim_python
+let g:python3_host_prog="/opt/homebrew/bin/python3"
 
 " operations to help with zettel
 "nnoremap <leader>cy :let @+=expand('%:t')<CR>
