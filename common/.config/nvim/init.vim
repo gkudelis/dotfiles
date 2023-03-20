@@ -11,7 +11,7 @@ call plug#begin()
 Plug 'tpope/vim-sensible'
 
 " --- fennel configuration
-Plug 'Olical/aniseed', { 'tag': 'v3.23.0' }
+Plug 'Olical/aniseed'
 
 " --- display
 Plug 'altercation/vim-colors-solarized'
@@ -49,7 +49,7 @@ Plug 'L3MON4D3/LuaSnip'
 
 " --- interactive evaluation (REPL)
 Plug 'bakpakin/fennel.vim'
-Plug 'Olical/conjure', {'tag': 'v4.25.0'}
+Plug 'Olical/conjure'
 
 " --- key map suggestions
 Plug 'liuchengxu/vim-which-key'
