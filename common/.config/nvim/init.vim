@@ -81,15 +81,6 @@ nnoremap <leader>g :G<cr>
 nnoremap <leader>gb :G blame<cr>
 nnoremap <leader>gp :G push<cr>
 
-" --- stuff
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-
 " --- fzf
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -98,16 +89,13 @@ let g:fzf_action = {
   \ 'ctrl-y': {lines -> setreg('*', join(lines, "\n"))}}
 nnoremap <leader>a :Ag 
 nnoremap <leader>f :Files<cr>
-nnoremap ; :Buffers<cr>
+nnoremap <leader>b :Buffers<cr>
 vnoremap <leader>a y:Ag <C-R>"<CR>
 
 " --- snippets
 " let g:UltiSnipsJumpForwardTrigger = "<c-f>"
 " let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
 " set runtimepath+=~/.config/nvim/ged-snippets/
-
-" --- autocompletion
-"let g:deoplete#enable_at_startup = 1
 
 " --- language client support
 "let g:LanguageClient_hasSnippetSupport = 1
