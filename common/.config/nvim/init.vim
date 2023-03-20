@@ -62,10 +62,10 @@ Plug 'michal-h21/vim-zettel'
 call plug#end()
 
 " --- leaders
-let mapleader = "\\"
+let mapleader = " "
 let maplocalleader = ","
-nnoremap <silent> <leader> :<c-u>WhichKey "\\"<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+nnoremap <silent> <leader> :<c-u>WhichKey " "<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ","<CR>
 
 " --- display
 "set t_Co=256
