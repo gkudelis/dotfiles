@@ -92,20 +92,6 @@ nnoremap <leader>f :Files<cr>
 nnoremap <leader>b :Buffers<cr>
 vnoremap <leader>a y:Ag <C-R>"<CR>
 
-" --- snippets
-" let g:UltiSnipsJumpForwardTrigger = "<c-f>"
-" let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
-" set runtimepath+=~/.config/nvim/ged-snippets/
-
-" --- language client support
-"let g:LanguageClient_hasSnippetSupport = 1
-"let g:LanguageClient_serverCommands = {
-"\ }
-"nnoremap <leader>lm <Plug>(lcn-menu)
-"nnoremap <leader>ld <Plug>(lcn-definition)
-"nnoremap <leader>lh <Plug>(lcn-hover)
-"nnoremap <leader>le <Plug>(lcn-explain-error)
-
 set background=dark
 colorscheme solarized
 
@@ -118,7 +104,6 @@ set linebreak
 set nolist
 
 set colorcolumn=80
-"set cursorline
 
 set tabstop=4
 set shiftwidth=4
@@ -193,9 +178,7 @@ local on_attach = function(client, bufnr)
 end
 
 -- Add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
+capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local lspconfig = require('lspconfig')
