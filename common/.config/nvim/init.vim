@@ -89,7 +89,7 @@ let g:fzf_action = {
   \ 'ctrl-y': {lines -> setreg('*', join(lines, "\n"))}}
 nnoremap <leader>a :Ag 
 nnoremap <leader>f :Files<cr>
-nnoremap <leader>b :Buffers<cr>
+nnoremap ; :Buffers<cr>
 vnoremap <leader>a y:Ag <C-R>"<CR>
 
 set background=dark
