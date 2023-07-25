@@ -22,6 +22,7 @@
     dump = cat-file -p
 [push]
 	default = current
+	autoSetupRemote = true
 [pull]
     default = current
 	rebase = true
