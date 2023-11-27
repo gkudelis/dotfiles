@@ -43,7 +43,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-
+(setq org-roam-directory "~/notes/")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -76,6 +76,28 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(after! org
+  (defun org-roam-project-files ()
+    "Return a list of note files containing project tag." ;
+    (seq-uniq
+     (seq-map
+      #'car
+      (org-roam-db-query
+       [:select [nodes:file]
+        :from tags
+        :left-join nodes
+        :on (= tags:node-id nodes:id)
+        :where (like tag (quote "%\"project\"%"))]))))
+
+  (defun update-agenda-files (&rest _)
+    "Update the value of `org-agenda-files'."
+    (setq org-agenda-files (org-roam-project-files)))
+
+  (add-to-list 'org-tags-exclude-from-inheritance "project")
+  (advice-add 'org-agenda :before #'update-agenda-files)
+  (advice-add 'org-todo-list :before #'update-agenda-files))
+
 
 (when (eq system-type 'darwin)
   (setq
