@@ -14,7 +14,7 @@ setopt hist_ignore_all_dups
 # Auto-comlete mumbo-jumbo
 setopt notify
 unsetopt appendhistory autocd beep extendedglob nomatch
-bindkey -v
+#bindkey -v
 bindkey -M vicmd '?' history-incremental-search-backward
 
 #zstyle :compinstall filename '/home/giedrius/.zshrc'
