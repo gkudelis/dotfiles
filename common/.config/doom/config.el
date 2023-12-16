@@ -109,6 +109,10 @@
 
 (setq ruby-indent-level 2)
 
+(use-package! company
+  :config
+  (setq company-idle-delay nil))
+
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
