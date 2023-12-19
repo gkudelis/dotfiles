@@ -40,11 +40,6 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-(setq org-roam-directory "~/notes/")
-
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
@@ -77,6 +72,34 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(when (eq system-type 'darwin)
+  (setq
+   mac-command-modifier 'control
+   mac-option-modifier 'meta
+   mac-right-option-modifier 'meta
+   mac-control-modifier 'super
+   mac-function-modifier 'hyper))
+
+(use-package! company
+  :config (setq company-idle-delay nil))
+
+(use-package! copilot
+  ; disabling auto-enable, if you want to re-enable remove the :commands line
+  ; :hook (prog-mode . copilot-mode)
+  :commands copilot-mode
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(use-package! org
+  :init (setq
+         org-directory "~/org/"
+         org-roam-directory "~/notes/"))
+
 (after! org
   (defun org-roam-project-files ()
     "Return a list of note files containing project tag." ;
@@ -97,26 +120,3 @@
   (add-to-list 'org-tags-exclude-from-inheritance "project")
   (advice-add 'org-agenda :before #'update-agenda-files)
   (advice-add 'org-todo-list :before #'update-agenda-files))
-
-
-(when (eq system-type 'darwin)
-  (setq
-   mac-command-modifier 'control
-   mac-option-modifier 'meta
-   mac-right-option-modifier 'meta
-   mac-control-modifier 'super
-   mac-function-modifier 'hyper))
-
-(setq ruby-indent-level 2)
-
-(use-package! company
-  :config
-  (setq company-idle-delay nil))
-
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)))
