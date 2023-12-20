@@ -120,3 +120,6 @@
   (add-to-list 'org-tags-exclude-from-inheritance "project")
   (advice-add 'org-agenda :before #'update-agenda-files)
   (advice-add 'org-todo-list :before #'update-agenda-files))
+
+(use-package! envrc
+  :config (envrc-global-mode))
