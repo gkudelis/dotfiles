@@ -1,0 +1,7 @@
+alias dhttp='docker run --rm -it --network=vinted_default --env JWT_AUTH_TOKEN teracy/httpie-jwt-auth'
+
+export PATH="$PATH:$HOME/.cargo/bin"
+
+eval "$(rbenv init -)"
+
+source "${DEVTOOLS_PATH:-$HOME/vinted/dev-tools}/bin/shell_function.sh"

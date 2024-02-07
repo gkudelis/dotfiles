@@ -1,0 +1,3 @@
+\ 'rust': ['bash', expand('~/bin/language_server_wrappers/rust.sh')],
+\ 'ruby': ['bash', expand('~/bin/language_server_wrappers/ruby.sh')],
+\ 'python': ['bash', expand('~/bin/language_server_wrappers/python.sh')],
