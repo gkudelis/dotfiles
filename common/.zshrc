@@ -72,3 +72,7 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 eval $(luarocks path)
 
 export BAT_THEME="Solarized (dark)"
+
+if type "mise" > /dev/null; then
+  eval "$(mise activate zsh)"
+fi
