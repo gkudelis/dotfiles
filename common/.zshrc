@@ -44,6 +44,7 @@ alias dodo='docker run --rm -it -v "$PWD:$PWD" -w "$PWD" -u $(id -u):$(id -g)'
 alias ranger='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"'
 alias owner='code_owners | grep'
 alias kv='NVIM_APPNAME="nvim-kickstart" nvim'
+alias lv='NVIM_APPNAME="lazyvim" nvim'
 
 function pt { pstree $(pgrep "$1") }
 
