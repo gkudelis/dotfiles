@@ -16,7 +16,7 @@
  
 (defalias
   ext  (layer-toggle extend) ;; Bind 'ext' to the Extend Layer
-  exc (tap-hold-next 200 esc @ext)
+  zex (tap-hold-next 200 z @ext)
   sym  (layer-toggle symbols) ;; Bind 'sym' to Symbols Layer
   qw (layer-switch qwerty)
   clm (layer-switch colemak-dh)
@@ -38,8 +38,8 @@
   @qw     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   grv      1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab      q    w    f    p    b    j    l    u    y    ;    [    ]    \\
-  @exc     a    r    s    t    g    m    n    e    i    o    '    ret
-  lsft       x    c    d    v    z    k    h    ,    .    /    rsft
+  esc      a    r    s    t    g    m    n    e    i    o    '    ret
+  lsft       x    c    d    v   @zex  k    h    ,    .    /    rsft
   lmet     lalt lctl           spc            rctl ralt rmet
 )
 
