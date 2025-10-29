@@ -1,6 +1,6 @@
 alias dhttp='docker run --rm -it --network=vinted_default --env JWT_AUTH_TOKEN teracy/httpie-jwt-auth'
 
-export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin:$HOME/.local/bin"
 
 eval "$(rbenv init -)"
 
