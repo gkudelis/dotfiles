@@ -81,5 +81,3 @@ eval $(luarocks path)
 if type "mise" > /dev/null; then
   eval "$(mise activate zsh)"
 fi
-
-export PAGER=bat
