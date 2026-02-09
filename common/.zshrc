@@ -14,7 +14,7 @@ setopt hist_ignore_all_dups
 # Auto-comlete mumbo-jumbo
 setopt notify
 unsetopt appendhistory autocd beep extendedglob nomatch
-#bindkey -v
+bindkey -v
 bindkey -M vicmd '?' history-incremental-search-backward
 
 #zstyle :compinstall filename '/home/giedrius/.zshrc'
@@ -39,6 +39,7 @@ alias l='ls'
 alias ll='ls -l'
 alias la='ls -la'
 alias lh='ls -lh'
+alias nv='nvim'
 
 alias dodo='docker run --rm -it -v "$PWD:$PWD" -w "$PWD" -u $(id -u):$(id -g)'
 alias ranger='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"'
