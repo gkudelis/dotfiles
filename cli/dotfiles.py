@@ -31,7 +31,6 @@ def prepare():
         restore_variant(get_variant())
         prepare_p10k()
         link()
-        plug_install()
     else:
         print('Variant does not exist')
 
@@ -39,7 +38,6 @@ def prepare():
 @cli.command()
 @with_logging
 def clear():
-    plug_uninstall()
     unlink()
     remove_p10k()
 
@@ -52,16 +50,6 @@ def variant(new_variant):
     else:
         print(get_variant())
 
-
-@with_logging
-def plug_install():
-    sh.nvim('--headless', '+PlugInstall', '+UpdateRemotePlugins', '+qa')
-
-
-@with_logging
-def plug_uninstall():
-    plugged_path = Path.home() / '.config' / 'nvim' / 'plugged'
-    sh.rm('-rf', plugged_path)
 
 
 @with_logging
