@@ -513,7 +513,16 @@ require('lazy').setup({
       --    :Mason
       --
       --  You can press `g?` for help in this menu.
-      local ensure_installed = vim.tbl_keys(servers or {})
+      -- Mason package names sometimes differ from lspconfig names (hyphens vs underscores).
+      -- This mapping translates where needed; unlisted names are passed through as-is.
+      local mason_name = {
+        fennel_language_server = 'fennel-language-server',
+        rust_analyzer = 'rust-analyzer',
+      }
+      local ensure_installed = {}
+      for name, _ in pairs(servers) do
+        table.insert(ensure_installed, mason_name[name] or name)
+      end
       vim.list_extend(ensure_installed, {
         'lua-language-server', -- Lua Language server
         'stylua', -- Used to format Lua code
