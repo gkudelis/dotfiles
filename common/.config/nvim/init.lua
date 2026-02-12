@@ -143,6 +143,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Enable treesitter highlighting for languages with installed parsers
+-- (Neovim only auto-enables this for bundled parsers)
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Enable treesitter highlighting',
+  group = vim.api.nvim_create_augroup('kickstart-treesitter-highlight', { clear = true }),
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -546,9 +556,13 @@ require('lazy').setup({
         table.insert(ensure_installed, mason_name[name] or name)
       end
       vim.list_extend(ensure_installed, {
+        'goimports', -- Go import sorter/formatter
         'lua-language-server', -- Lua Language server
+        'ruff', -- Python linter and formatter (provides ruff_format)
         'stylua', -- Used to format Lua code
-        -- You can add other tools here that you want Mason to install
+        -- gofmt: bundled with Go toolchain
+        -- rustfmt: install via `rustup component add rustfmt`
+        -- fnlfmt: install via `luarocks install fnlfmt`
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -624,13 +638,11 @@ require('lazy').setup({
         end
       end,
       formatters_by_ft = {
+        fennel = { 'fnlfmt' },
+        go = { 'goimports', 'gofmt' },
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use a sub-list to tell conform to run *until* a formatter
-        -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        python = { 'ruff_format' },
+        rust = { 'rustfmt', lsp_format = 'fallback' },
       },
     },
   },
@@ -793,11 +805,8 @@ require('lazy').setup({
     build = ':TSUpdate',
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     config = function()
-      require('nvim-treesitter').setup {
-        ensure_installed = { 'bash', 'c', 'diff', 'fennel', 'go', 'gomod', 'gosum', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'python', 'query', 'rust', 'vim', 'vimdoc' },
-        -- Autoinstall languages that are not installed
-        auto_install = true,
-      }
+      -- Install missing parsers (no-op if already installed)
+      require('nvim-treesitter').install { 'bash', 'c', 'diff', 'fennel', 'go', 'gomod', 'gosum', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'python', 'query', 'rust', 'vim', 'vimdoc' }
     end,
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
