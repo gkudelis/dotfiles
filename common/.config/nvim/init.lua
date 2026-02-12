@@ -510,14 +510,6 @@ require('lazy').setup({
       --  See `:help lsp-config` for information about keys and how to configure
       local servers = {
         -- clangd = {},
-        fennel_language_server = {
-          settings = {
-            fennel = {
-              diagnostics = { globals = { 'vim' } },
-              workspace = { library = vim.api.nvim_list_runtime_paths() },
-            },
-          },
-        },
         gopls = {},
         pyright = {},
         rust_analyzer = {},
@@ -538,7 +530,6 @@ require('lazy').setup({
       -- Mason package names sometimes differ from lspconfig names (hyphens vs underscores).
       -- This mapping translates where needed; unlisted names are passed through as-is.
       local mason_name = {
-        fennel_language_server = 'fennel-language-server',
         rust_analyzer = 'rust-analyzer',
       }
       local ensure_installed = {}
@@ -546,6 +537,7 @@ require('lazy').setup({
         table.insert(ensure_installed, mason_name[name] or name)
       end
       vim.list_extend(ensure_installed, {
+        'fennel-language-server', -- Fennel Language Server (configured separately below)
         'lua-language-server', -- Lua Language server
         'stylua', -- Used to format Lua code
         -- You can add other tools here that you want Mason to install
@@ -558,6 +550,17 @@ require('lazy').setup({
         vim.lsp.config(name, server)
         vim.lsp.enable(name)
       end
+
+      -- Fennel Language Server: make it aware of Neovim's vim global and runtime paths
+      vim.lsp.config('fennel_language_server', {
+        settings = {
+          fennel = {
+            diagnostics = { globals = { 'vim' } },
+            workspace = { library = vim.api.nvim_list_runtime_paths() },
+          },
+        },
+      })
+      vim.lsp.enable 'fennel_language_server'
 
       -- Special Lua Config, as recommended by neovim help docs
       vim.lsp.config('lua_ls', {
