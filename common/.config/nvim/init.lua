@@ -168,19 +168,7 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
--- [[ Install `hotpot.nvim` for Fennel support ]]
---    Hotpot must be loaded before lazy.nvim setup so Fennel files can be required.
---    See https://github.com/rktjmp/hotpot.nvim for more info
-local hotpotpath = vim.fn.stdpath 'data' .. '/lazy/hotpot.nvim'
-if not (vim.uv or vim.loop).fs_stat(hotpotpath) then
-  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', 'https://github.com/rktjmp/hotpot.nvim.git', hotpotpath }
-  if vim.v.shell_error ~= 0 then
-    error('Error cloning hotpot.nvim:\n' .. out)
-  end
-end
-rtp:prepend(hotpotpath)
 vim.loader.enable()
-require 'hotpot'
 
 -- [[ Configure and install plugins ]]
 --
@@ -195,7 +183,6 @@ require 'hotpot'
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  { 'rktjmp/hotpot.nvim' }, -- Fennel support (bootstrapped above, listed here for updates)
   { 'NMAC427/guess-indent.nvim', opts = {} }, -- Detect tabstop and shiftwidth automatically
 
   -- Here is a more advanced example where we pass configuration
