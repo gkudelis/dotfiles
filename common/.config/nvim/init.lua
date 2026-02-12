@@ -158,6 +158,20 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
+-- [[ Install `hotpot.nvim` for Fennel support ]]
+--    Hotpot must be loaded before lazy.nvim setup so Fennel files can be required.
+--    See https://github.com/rktjmp/hotpot.nvim for more info
+local hotpotpath = vim.fn.stdpath 'data' .. '/lazy/hotpot.nvim'
+if not (vim.uv or vim.loop).fs_stat(hotpotpath) then
+  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', 'https://github.com/rktjmp/hotpot.nvim.git', hotpotpath }
+  if vim.v.shell_error ~= 0 then
+    error('Error cloning hotpot.nvim:\n' .. out)
+  end
+end
+rtp:prepend(hotpotpath)
+vim.loader.enable()
+require 'hotpot'
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -171,6 +185,7 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
+  { 'rktjmp/hotpot.nvim' }, -- Fennel support (bootstrapped above, listed here for updates)
   { 'NMAC427/guess-indent.nvim', opts = {} }, -- Detect tabstop and shiftwidth automatically
 
   -- Here is a more advanced example where we pass configuration
@@ -785,19 +800,9 @@ require('lazy').setup({
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 
-  --  Here are some example plugins that I've included in the Kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-
-  require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.indent_line',
-  require 'kickstart.plugins.lint',
-  require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
-  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+  -- Additional plugins are loaded from lua/plugins/*.lua
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  { import = 'custom.plugins' },
+  { import = 'plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
