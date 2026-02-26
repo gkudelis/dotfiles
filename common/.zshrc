@@ -41,14 +41,9 @@ alias la='ls -la'
 alias lh='ls -lh'
 alias nv='nvim'
 
-alias dodo='docker run --rm -it -v "$PWD:$PWD" -w "$PWD" -u $(id -u):$(id -g)'
-alias ranger='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"'
 alias owner='code_owners | grep'
 
-
-function pt { pstree $(pgrep "$1") }
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fzf --zsh)"
 bindkey -r "^T"
 bindkey -r "^R"
 bindkey "^F" fzf-file-widget
@@ -60,23 +55,18 @@ export FZF_DEFAULT_OPTS="
 	--color=spinner:#f6c177,info:#9ccfd8
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
------ zshrc_gpg_agent
-
 eval "$(direnv hook zsh)"
 
------ zshrc_pass_db
-export PASS_DB
-
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
 export EDITOR=nvim
 
 ----- zshrc_misc
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.antidote/antidote.zsh
+antidote load
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-eval $(luarocks path)
 
 if type "mise" > /dev/null; then
   eval "$(mise activate zsh)"

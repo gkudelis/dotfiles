@@ -1,1 +1,0 @@
-(setq doom-font (font-spec :family "Hack" :size 20))

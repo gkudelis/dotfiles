@@ -29,7 +29,7 @@ def prepare():
     variant = get_variant()
     if variant:
         restore_variant(get_variant())
-        prepare_p10k()
+        prepare_antidote()
         link()
     else:
         print('Variant does not exist')
@@ -39,7 +39,6 @@ def prepare():
 @with_logging
 def clear():
     unlink()
-    remove_p10k()
 
 
 @cli.command()
@@ -53,20 +52,14 @@ def variant(new_variant):
 
 
 @with_logging
-def prepare_p10k():
-    repository_url = 'https://github.com/romkatv/powerlevel10k.git'
-    checkout_path = Path.home() / 'powerlevel10k'
+def prepare_antidote():
+    repository_url = 'https://github.com/mattmc3/antidote.git'
+    checkout_path = Path.home() / '.antidote'
     if checkout_path.is_dir():
         with cd(checkout_path):
             sh.git.pull()
     else:
-        sh.git.clone('--depth=1', repository_url , checkout_path)
-
-
-@with_logging
-def remove_p10k():
-    checkout_path = Path.home() / 'powerlevel10k'
-    sh.rm('-rf', checkout_path)
+        sh.git.clone('--depth=1', repository_url, checkout_path)
 
 
 @with_logging
