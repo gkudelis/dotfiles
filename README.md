@@ -9,7 +9,8 @@ Install these before bootstrapping:
 - **zsh** (ships with macOS; `apt install zsh` on Linux)
 - **git** (`xcode-select --install` on macOS; `apt install git` on Linux)
 - **stow** (`brew install stow` on macOS; `apt install stow` on Linux)
-- **[mise](https://mise.jdx.dev/getting-started.html)** (manages all other tools including Python)
+- **python3** (ships with macOS; `apt install python3` on Linux)
+- **[mise](https://mise.jdx.dev/getting-started.html)** (manages dev tools declared in `.config/mise/config.toml`)
 
 ## Bootstrap
 
@@ -18,17 +19,11 @@ Install these before bootstrapping:
 git clone <repo-url> ~/dotfiles
 cd ~/dotfiles
 
-# Install Python via mise
-mise install python@latest
-
-# Install the dotfiles CLI
-pip install -e cli
-
 # Set the variant for this machine
-dotfiles variant oxygen
+./dotfiles.py variant oxygen
 
 # Assemble configs, install antidote, and symlink into $HOME
-dotfiles prepare
+./dotfiles.py prepare
 
 # Install all tools declared in mise config
 mise install
@@ -40,10 +35,10 @@ On first shell startup after `dotfiles prepare`, [antidote](https://github.com/m
 
 | Command | Description |
 |---|---|
-| `dotfiles prepare` | Assemble config files from templates, clone/update antidote, symlink into `$HOME` |
-| `dotfiles clear` | Remove symlinks from `$HOME` |
-| `dotfiles variant` | Show current variant |
-| `dotfiles variant <name>` | Set variant (run `dotfiles prepare` after) |
+| `./dotfiles.py prepare` | Assemble config files from templates, clone/update antidote, symlink into `$HOME` |
+| `./dotfiles.py clear` | Remove symlinks from `$HOME` |
+| `./dotfiles.py variant` | Show current variant |
+| `./dotfiles.py variant <name>` | Set variant (run `prepare` after) |
 
 ## How it works
 
@@ -76,7 +71,7 @@ Project-level tools (go, ruby, node, java, scala, gradle) are managed by per-pro
 ## Repo structure
 
 ```
-cli/              Python CLI (dotfiles command)
+dotfiles.py       Standalone CLI script (no dependencies)
 common/           Config templates (symlinked into $HOME)
   .zshrc
   .zsh_plugins.txt
