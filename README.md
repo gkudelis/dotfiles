@@ -9,8 +9,7 @@ Install these before bootstrapping:
 - **zsh** (ships with macOS; `apt install zsh` on Linux)
 - **git** (`xcode-select --install` on macOS; `apt install git` on Linux)
 - **stow** (`brew install stow` on macOS; `apt install stow` on Linux)
-- **python3 + pip** (for the `dotfiles` CLI)
-- **[mise](https://mise.jdx.dev/getting-started.html)** (installs dev tools declared in `.config/mise/config.toml`)
+- **[mise](https://mise.jdx.dev/getting-started.html)** (manages all other tools including Python)
 
 ## Bootstrap
 
@@ -19,8 +18,11 @@ Install these before bootstrapping:
 git clone <repo-url> ~/dotfiles
 cd ~/dotfiles
 
+# Install Python via mise
+mise install python@latest
+
 # Install the dotfiles CLI
-pip3 install -e cli
+pip install -e cli
 
 # Set the variant for this machine
 dotfiles variant oxygen
