@@ -71,3 +71,5 @@ antidote load
 if type "mise" > /dev/null; then
   eval "$(mise activate zsh)"
 fi
+
+eval "$(zoxide init zsh)"
