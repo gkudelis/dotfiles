@@ -9,7 +9,6 @@ Install these before bootstrapping:
 - **zsh** (ships with macOS; `apt install zsh` on Linux)
 - **git** (`xcode-select --install` on macOS; `apt install git` on Linux)
 - **stow** (`brew install stow` on macOS; `apt install stow` on Linux)
-- **python3** (ships with macOS; `apt install python3` on Linux)
 - **[mise](https://mise.jdx.dev/getting-started.html)** (manages dev tools declared in `.config/mise/config.toml`)
 
 ## Bootstrap
@@ -19,13 +18,19 @@ Install these before bootstrapping:
 git clone <repo-url> ~/dotfiles
 cd ~/dotfiles
 
+# Activate mise for the current shell session
+eval "$(mise activate zsh)"    # or: eval "$(mise activate bash)"
+
+# Install python (from the repo-local mise.toml)
+mise install
+
 # Set the variant for this machine
 ./dotfiles.py variant oxygen
 
 # Assemble configs, install antidote, and symlink into $HOME
 ./dotfiles.py prepare
 
-# Install all tools declared in mise config
+# Install all tools declared in the global mise config
 mise install
 ```
 
@@ -72,6 +77,7 @@ Project-level tools (go, ruby, node, java, scala, gradle) are managed by per-pro
 
 ```
 dotfiles.py       Standalone CLI script (no dependencies)
+mise.toml         Repo-local mise config (python for bootstrapping)
 common/           Config templates (symlinked into $HOME)
   .zshrc
   .zsh_plugins.txt
